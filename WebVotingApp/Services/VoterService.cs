@@ -4,16 +4,11 @@ using System.Linq;
 using WebVotingApp.Entities;
 using WebVotingApp.Exceptions;
 using WebVotingApp.Models;
-using WebVotingApp.Repository;
+using WebVotingApp.Repository.Interface;
+using WebVotingApp.Services.Interface;
 
 namespace WebVotingApp.Services
 {
-    public interface IVoterService
-    {
-        public void CreateVoter(CreateVoterDto createVoter);
-        public List<VoterDto> GetVoters();
-        public void VoteForTheCandidate(VoteDto voteDto);
-    }
     public class VoterService: IVoterService
     {
         private readonly IVoterRepository _voterRepository;
@@ -44,22 +39,23 @@ namespace WebVotingApp.Services
             Voter voter = GetVoter(voteDto.VoterId);
             Candidate candidate = GetCandidate(voteDto.CandidateId);
 
-            if (!voter.HasVoted)
-            {
-                ChangeToAlreadyVoted(voter);
-                IncreaseTheNumberOfVotes(candidate);
-            }
-            else
+            if (voter.HasVoted)
             {
                 throw new BadRequestException("You have already voted");
             }
+
+            ChangeToAlreadyVoted(voter);
+            IncreaseTheNumberOfVotes(candidate);
         }
 
         private Candidate GetCandidate(int Id)
         {
             var candidate = _candidateRepository.GetCandidate(Id);
             if (candidate is null)
+            {
                 throw new NotFoundException("The candidate does not exist");
+            }
+                
             return candidate;
         }
 
@@ -67,18 +63,22 @@ namespace WebVotingApp.Services
         {
             var voter = _voterRepository.GetVoter(id);
             if (voter is null)
+            {
                 throw new NotFoundException("The voter does not exist");
+
+            }
+
             return voter;
         }
 
         private void ChangeToAlreadyVoted(Voter voter)
         {
-            voter.HasVoted = true;
+            voter.ChangeHasVoted(true);
             _voterRepository.Update(voter);
         }
         private void IncreaseTheNumberOfVotes(Candidate candidate)
         {
-            candidate.Votes += 1;
+            candidate.IncreaseVotes();
             _candidateRepository.Update(candidate);
         }
 

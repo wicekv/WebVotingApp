@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebVotingApp.Models;
-using WebVotingApp.Services;
+using WebVotingApp.Services.Interface;
 
 namespace WebVotingApp.Controllers
 {
@@ -28,7 +25,7 @@ namespace WebVotingApp.Controllers
         }
         [Route("candidates")]
         [HttpGet]
-        public ActionResult<List<VoterDto>> Get()
+        public ActionResult<List<VoterDto>> GetCandidates()
         {
             return Ok(_candidateService.GetCandidates());
         }

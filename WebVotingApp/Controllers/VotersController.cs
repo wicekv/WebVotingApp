@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebVotingApp.Models;
-using WebVotingApp.Services;
+using WebVotingApp.Services.Interface;
 
 namespace WebVotingApp.Controllers
 {

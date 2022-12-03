@@ -1,19 +1,13 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebVotingApp.Entities;
 using WebVotingApp.Models;
-using WebVotingApp.Repository;
+using WebVotingApp.Repository.Interface;
+using WebVotingApp.Services.Interface;
 
 namespace WebVotingApp.Services
 {
-    public interface ICandidateService
-    {
-        public List<CandidateDto> GetCandidates();
-        public void CreateCandidate(CreateCandidateDto createCandidate);
-    }
     public class CandidateService : ICandidateService
     {
 

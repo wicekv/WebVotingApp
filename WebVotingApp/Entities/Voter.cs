@@ -17,5 +17,10 @@ namespace WebVotingApp.Entities
             this.HasVoted = false;
         }
 
+        public void ChangeHasVoted(bool HasVoted)
+        {
+            this.HasVoted = HasVoted;
+        }
+
     }
 }
