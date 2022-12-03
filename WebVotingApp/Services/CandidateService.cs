@@ -28,13 +28,13 @@ namespace WebVotingApp.Services
 
         public void CreateCandidate(CreateCandidateDto createCandidate)
         {
-            Candidate candidate= _mapper.Map<Candidate>(createCandidate);
+            Candidate candidate = new Candidate(createCandidate.Name);
+
             _candidateRepository.Create(candidate);
         }
         public List<CandidateDto> GetCandidates()
         {
             var candidates = _candidateRepository.GetCandidates().ToList();
-
             List<CandidateDto> candidateDtos = _mapper.Map<List<CandidateDto>>(candidates);
 
             return candidateDtos;

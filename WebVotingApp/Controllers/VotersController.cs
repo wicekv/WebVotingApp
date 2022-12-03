@@ -30,7 +30,7 @@ namespace WebVotingApp.Controllers
         
         [Route("voters")]
         [HttpGet]
-        public ActionResult<List<VoterDto>> Get()
+        public ActionResult<List<VoterDto>> GetVoters()
         {
             return Ok(_voterService.GetVoters());
         }

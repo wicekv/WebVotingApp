@@ -10,5 +10,12 @@ namespace WebVotingApp.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public bool HasVoted { get; set; }
+
+        public Voter(string Name)
+        {
+            this.Name = Name;
+            this.HasVoted = false;
+        }
+
     }
 }

@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebVotingApp.Entities;
+using WebVotingApp.Repository.Interface;
 
 namespace WebVotingApp.Repository
 {
-    public interface IVoterRepository
-    {
-        public void Create(Voter voter);
-        public IEnumerable<Voter> GetVoters();
-        public Voter GetVoter(int id);
-        public void Update(Voter voter);
-
-    }
     public class VoterRepository: IVoterRepository
     {
         private readonly VotingDbContext _context;
