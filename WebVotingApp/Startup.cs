@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WebVotingApp.Entities;
+using WebVotingApp.Models;
+using WebVotingApp.Models.Validators;
 using WebVotingApp.Repository;
 using WebVotingApp.Repository.Interface;
 using WebVotingApp.Services;
@@ -26,6 +30,9 @@ namespace WebVotingApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
+            services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+
             services.AddAutoMapper(this.GetType().Assembly);
 
             services.AddScoped<ICandidateService, CandidateService>();
@@ -35,7 +42,10 @@ namespace WebVotingApp
             services.AddScoped<IVoterRepository, VoterRepository>();
             
 
+            services.AddScoped<IValidator<CreateCandidateDto>,CreateCandidateDtoValidator>();
+            services.AddScoped<IValidator<CreateVoterDto>, CreateVoterDtoValidator>();
 
+            services.AddHttpContextAccessor();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebVotingApp", Version = "v1" });
@@ -46,7 +56,8 @@ namespace WebVotingApp
 
                     builder.AllowAnyMethod()
                         .AllowAnyHeader()
-                        .WithOrigins(Configuration["AllowedOrigins"])
+                        .AllowAnyOrigin()
+                        //.WithOrigins(Configuration["AllowedOrigins"])
 
                     );
             });
