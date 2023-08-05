@@ -1,0 +1,20 @@
+<mat-table [dataSource]="candidatesData" style="overflow-y: scroll; height: 300px">
+  <ng-container matColumnDef="Name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="Votes">
+    <mat-header-cell *matHeaderCellDef>Votes</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.votes}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="Candidates">
+    <mat-header-cell *matHeaderCellDef style="justify-content: space-between">Candidate
+    <button mat-icon-button (click)="openAddDialog()">
+      <mat-icon fontIcon="add_circle">add</mat-icon>
+    </button>
+    </mat-header-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['Candidates']; sticky: true" [attr.aria-colspan]="2"></mat-header-row>
+  <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

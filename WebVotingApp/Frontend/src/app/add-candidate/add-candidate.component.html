@@ -1,0 +1,13 @@
+<div class="">
+  <h2>Add Candidate</h2>
+  <form action="" [formGroup]="candidateForm" (ngSubmit)="create(name.value)">
+    <div class="form-controls">
+      <mat-form-field>
+        <input #name id="name" matInput formControlName="name" placeholder="Name">
+        <mat-error *ngIf="candidateForm.controls.name.invalid && candidateForm.controls.name.touched">The name must be 1-50 characters</mat-error>
+      </mat-form-field>
+      <button mat-button class="mat-mdc-raised-button mat-primary" [disabled]="!candidateForm.valid">Submit</button>
+    </div>
+  </form>
+
+</div>

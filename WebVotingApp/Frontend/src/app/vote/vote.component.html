@@ -1,0 +1,28 @@
+<div class="">
+  <h2>Vote</h2>
+  <form action="" [formGroup]="voteForm" (ngSubmit)="vote()">
+    <mat-grid-list cols="3" rowHeight="50px">
+      <mat-grid-tile>
+        <div class="form-controls">
+          <mat-form-field floatLabel="always">
+            <mat-select formControlName="idVoter" style="align-items: center" [(ngModel)]="voterId" placeholder="I am">
+              <mat-option *ngFor="let voter of voters" [value]="voter.id">{{voter.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="form-controls">
+          <mat-form-field floatLabel="always">
+            <mat-select formControlName="idCandidate"  [(ngModel)]="candidateId" placeholder="I vote for">
+              <mat-option *ngFor="let candidate of candidates" [value]="candidate.id">{{candidate.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-button class="mat-mdc-raised-button mat-primary" [disabled]="!voteForm.valid">Submit</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>

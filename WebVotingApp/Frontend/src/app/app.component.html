@@ -1,0 +1,17 @@
+<div class="table">
+  <h1>Voting App</h1>
+  <mat-grid-list cols="2" rowHeight="300px" >
+    <mat-grid-tile>
+      <app-voter (voterEvent)="refreshVotingSelectorVoters()" style="width: 95%"></app-voter>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <app-candidate (candidateEvent)="refreshVotingSelectorCandidates()" style="width: 95%"></app-candidate>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="1" rowHeight="200px" >
+    <mat-grid-tile>
+      <app-vote (voteEvent)="refreshTables()" style="width: 50%"></app-vote>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
